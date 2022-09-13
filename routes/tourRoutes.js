@@ -7,6 +7,9 @@ const router = express.Router();
 
 // router.param('id', tourController.checkID);
 
+// POST /tour/234fad4/reviews
+// GET /tour/234fad4/reviews
+
 router.use('/:tourId/reviews', reviewRouter);
 
 router
@@ -19,16 +22,16 @@ router
   .get(
     authController.protect,
     authController.restrictTo('admin', 'lead-guide', 'guide'),
-    tourController.getMOnthlyPlan
+    tourController.getMonthlyPlan
   );
 
 router
-  .route('/tour-within/:distance/center/:latlng/unit/:unit')
-  .get(tourController.getTourswithin);
-//tour-distance?distance=233,center=-40,45&unit=mi
-// /tours- distance/233/center/-40,45/unit/me
+  .route('/tours-within/:distance/center/:latlng/unit/:unit')
+  .get(tourController.getToursWithin);
+// /tours-within?distance=233&center=-40,45&unit=mi
+// /tours-within/233/center/-40,45/unit/mi
 
-router.route('/distance/:latlng/unit/:unit').get(tourController.getDistances);
+router.route('/distances/:latlng/unit/:unit').get(tourController.getDistances);
 
 router
   .route('/')
@@ -38,6 +41,7 @@ router
     authController.restrictTo('admin', 'lead-guide'),
     tourController.createTour
   );
+
 router
   .route('/:id')
   .get(tourController.getTour)
@@ -51,13 +55,5 @@ router
     authController.restrictTo('admin', 'lead-guide'),
     tourController.deleteTour
   );
-
-// router
-//   .route('/:tourId/reviews')
-//   .post(
-//     authController.protect,
-//     authController.restrictTo('user'),
-//     reviewController.createReviews
-//   );
 
 module.exports = router;

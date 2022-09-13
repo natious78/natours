@@ -12,7 +12,7 @@ router
   .post(
     authController.restrictTo('user'),
     reviewController.setTourUserIds,
-    reviewController.createReviews
+    reviewController.createReview
   );
 
 router
@@ -28,4 +28,3 @@ router
   );
 
 module.exports = router;
-  
