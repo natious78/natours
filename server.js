@@ -38,8 +38,8 @@ process.on('unhandledRejection', err => {
 });
 
 process.on('SIGTERM', () => {
-  console.log('SIGTERM received')
-  server.close(() =>{
-    console.log('Process terminated')
-  }
-})
+  console.log('SIGTERM received');
+  server.close(() => {
+    console.log('Process terminated');
+  });
+});
